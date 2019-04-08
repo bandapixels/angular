@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 @Injectable()
 export class AppEffects {
   @Effect()
-  loadMovies$ = this.actions$
+  change$ = this.actions$
     .pipe(
       ofType(ActionTypes.Change),
       switchMap(() => [new Increase(), new Decrease(), new Decrease()])

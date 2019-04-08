@@ -12,20 +12,20 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  firstNumber: Observable<number>;
-  secondNumber: Observable<number>;
-  firstBorderColor: Observable<string>;
-  secondBorderColor: Observable<string>;
+  firstNumber$: Observable<number>;
+  secondNumber$: Observable<number>;
+  firstBorderColor$: Observable<string>;
+  secondBorderColor$: Observable<string>;
 
   private colorMapper = map((n: number) => n >= 0 ? 'blue' : 'red');
   private intervalSub: Subscription;
 
   constructor(private store: Store<{ data: DataState }>) {
-    this.firstNumber = store.pipe(select((state => state.data.first)));
-    this.secondNumber = store.pipe(select((state => state.data.second)));
+    this.firstNumber$ = store.pipe(select((state => state.data.first)));
+    this.secondNumber$ = store.pipe(select((state => state.data.second)));
 
-    this.firstBorderColor = this.firstNumber.pipe(this.colorMapper);
-    this.secondBorderColor = this.secondNumber.pipe(this.colorMapper);
+    this.firstBorderColor$ = this.firstNumber$.pipe(this.colorMapper);
+    this.secondBorderColor$ = this.secondNumber$.pipe(this.colorMapper);
 
   }
 
